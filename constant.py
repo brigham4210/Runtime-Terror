@@ -37,6 +37,7 @@ LAYER_NAME_NUMBER = "Numbers"
 LAYER_NAME_NUMBER_HITBOX = "number_hitbox"
 LAYER_NAME_NUMBER_SYMBOLS = "number_symbols"
 LAYER_NAME_NUMBER_TARGETS = "number_targets"
+LAYER_NAME_MATH_PROBLEM_ORIGIN = "math_problems"
 LAYER_NAME_EXIT = "exits"
 
 PLAYER_TEXTURES = []
@@ -50,3 +51,7 @@ TARGET_BOX = "assets/kenney_sokobanpack/PNG/Default size/Crates/crate_29.png"
 TILE_SIZE = 32
 
 NUM_BASE_PATH = "assets/kenney_sokobanpack/PNG/Default size/Numbers/"
+
+# ******* DANGER ZONE *******
+# Brother Helfrich says to never do this stuff but I'm doing it anyway, sorry james
+GLOBAL_SCENE = None

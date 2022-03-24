@@ -6,6 +6,9 @@ from enum import Enum
 from constant import *
 
 
+# import constant.
+
+
 class NumberBlockHitbox(arcade.Sprite):
     def __init__(self, parent_block):
         super().__init__(TRANSPARENT_BOX_PATH,
@@ -343,7 +346,7 @@ class VisualMathProblem:
     the result are all represented.
     """
 
-    def __init__(self, scene, center_x=0, center_y=0, min=None, max=None):
+    def __init__(self, scene, center_x: float = 0, center_y: float = 0, min=None, max=None):
         self.scene = scene
         self.center_x = center_x
         self.center_y = center_y
@@ -399,3 +402,14 @@ class VisualMathProblem:
     def log(self):
         for block in self.draw_order:
             block.log()
+
+
+class VisualMathProblemLocation(arcade.Sprite):
+    def __init__(self):
+        super().__init__()
+        # self.sprite_lists[0].
+        self.vmp = VisualMathProblem(GLOBAL_SCENE, self.center_x, self.center_y)
+
+    def draw(self, *, filter=None, pixelated=None, blend_function=None):
+        super().draw()
+        self.vmp.draw()

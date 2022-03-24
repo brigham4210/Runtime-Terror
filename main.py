@@ -1,8 +1,9 @@
 import arcade
-from numbers_and_math import VisualMathProblem, NumberBlock
+from numbers_and_math import VisualMathProblem, NumberBlock, VisualMathProblemLocation
 from pyglet.math import Vec2
 from math import sqrt
 from constant import *
+import constant
 from player import Player
 
 
@@ -53,34 +54,30 @@ class MyGame(arcade.Window):
         # Load the Tiled Map
         layer_options = {
             
+            LAYER_NAME_MATH_PROBLEM_ORIGIN: {
+                "custom_class": VisualMathProblemLocation
+            }
         }
         self.tile_map = arcade.load_tilemap(MAPS[self.map_index], TILE_SCALING, layer_options)
 
         # Initialize Scene from the tilemap
         self.scene = arcade.Scene.from_tilemap(self.tile_map)
-        # repeat line 91 and line 88
         # Create the Sprite lists
         self.scene.add_sprite_list(LAYER_NAME_NUMBER_TARGETS)
         self.scene.add_sprite_list(LAYER_NAME_PLAYER)
         self.scene.add_sprite_list(LAYER_NAME_NUMBER)
         self.scene.add_sprite_list(LAYER_NAME_NUMBER_SYMBOLS)
         self.scene.add_sprite_list(LAYER_NAME_NUMBER_HITBOX)
-
-        # self.player_list.append(self.player_sprite)
         self.scene.add_sprite(LAYER_NAME_PLAYER, self.player)
-        # self.scene.add_sprite("Player", self.player_sprite)
         self.exit_list = arcade.SpriteList()
-        # self.scene.add_sprite("castle", self.castle_sprite)
-
-        # map_name = f":resources:tmx_maps/map2_level_{level}.tmx"
-        # my_map = arcade.tilemap.read_tmx(map_name)
-
-        # self.wall_list = arcade.tilemap.process_layer(map_object=my_map, layer_name=walls, scaling=TILE_SCALING, use_spatial_hash=True)
 
         # Make a test math problem
-        self.problem = VisualMathProblem(self.scene, SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, 1, 10)
-        self.problem.draw()
-        # self.problem.log()
+        # self.problem = VisualMathProblem(self.scene, SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, 1, 10)
+        # self.problem.draw()
+
+        # Draw the programmatically generated math problems (No longer needed wiht VIsualMathPRoblemLocation's draw())
+        # for math_problem in self.scene.get_sprite_list(LAYER_NAME_MATH_PROBLEM_ORIGIN).sprite_list:
+        #     math_problem.draw()
 
         # Create the 'physics engine'
         self.physics_engine = arcade.PhysicsEngineSimple(
@@ -89,6 +86,9 @@ class MyGame(arcade.Window):
                 self.scene.get_sprite_list(LAYER_NAME_NUMBER)
             ]
         )
+
+        # ****** Dangerous code *******
+        constant.GLOBAL_SCENE = self.scene
 
     def player_hit_door(self):
         collisions = arcade.check_for_collision_with_list(self.player, self.scene.get_sprite_list(LAYER_NAME_EXIT))
