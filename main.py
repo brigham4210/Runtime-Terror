@@ -51,7 +51,9 @@ class MyGame(arcade.Window):
         """
         map_name = "maps/Main-Spawn.tmx"
         # Load the Tiled Map
-        layer_options = {}
+        layer_options = {
+            
+        }
         self.tile_map = arcade.load_tilemap(MAPS[self.map_index], TILE_SCALING, layer_options)
 
         # Initialize Scene from the tilemap
