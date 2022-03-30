@@ -405,9 +405,27 @@ class VisualMathProblem:
 
 
 class VisualMathProblemLocation(arcade.Sprite):
-    def __init__(self):
+    def __init__(
+        self,
+        filename: str = None,
+        scale: float = 1,
+        image_x: float = 0,
+        image_y: float = 0,
+        image_width: float = 0,
+        image_height: float = 0,
+        center_x: float = 0,
+        center_y: float = 0,
+        flipped_horizontally: bool = False,
+        flipped_vertically: bool = False,
+        flipped_diagonally: bool = False,
+        hit_box_algorithm: str = "Simple",
+        hit_box_detail: float = 4.5,
+        texture: arcade.Texture = None,
+        angle: float = 0,    
+    ):
         super().__init__()
         # self.sprite_lists[0].
+
         self.vmp = VisualMathProblem(GLOBAL_SCENE, self.center_x, self.center_y)
 
     def draw(self, *, filter=None, pixelated=None, blend_function=None):
